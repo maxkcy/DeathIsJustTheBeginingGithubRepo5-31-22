@@ -12,7 +12,7 @@ Script & Toolkit for creating 2D parallax background https://assetstore.unity.co
 
 Link to assets I used https://opengameart.org/content/the-infiltrator-5-24-22
 
-Game Music by Silvester Alone: link is private
+Game Music by Silvester Alone: https://silvesteralone.bandcamp.com/
 Everything else was created by me
 
 
