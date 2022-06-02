@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - PlatForm
+  - Friendly
+  - Enemy
+  - CMD
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Friendly
+  - Enemy
+  - PlatForm
+  - Bkg
+  - Player
+  - Ladder
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Bkg
+    uniqueID: 2574601745
+    locked: 0
+  - name: PlatForm
+    uniqueID: 3120240049
+    locked: 0
+  - name: Objects
+    uniqueID: 1213795369
+    locked: 0
+  - name: Enemy
+    uniqueID: 164045635
+    locked: 0
+  - name: Team
+    uniqueID: 2792564997
+    locked: 0
+  - name: Player
+    uniqueID: 4017199767
+    locked: 0
