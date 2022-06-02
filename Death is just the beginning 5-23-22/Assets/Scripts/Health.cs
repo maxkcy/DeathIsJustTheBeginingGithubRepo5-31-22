@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     SpriteRenderer sr;
     [SerializeField] Cinemachine.CinemachineVirtualCamera MainCam;
     Rigidbody2D rb;
-    public bool Dead;
+    
     public LevelManager levelManager;
 
     void Start() {
@@ -17,11 +17,11 @@ public class Health : MonoBehaviour
         levelManager = FindObjectOfType<LevelManager>();
     }
 
-    public void TakeDamage() {
-        health -= 1;
+    public void TakeDamage(float dmg) {
+        health -= dmg;
         sr.color = Color.red;
         Invoke("ResetColor", .01f);
-        Debug.Log("<color=green>PlayerCtrl: </color> I'm taking damage");
+        Debug.Log("<color=green>Player/ai health: </color> I'm taking damage");
         if (health <= 0)
         {
             Collider2D[] cols = new Collider2D[rb.attachedColliderCount];

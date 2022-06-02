@@ -12,7 +12,7 @@ public class Scanner : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (collision.CompareTag("Friendly"))
+        if (collision.CompareTag("Friendly") )
         {
             if (!collision.isTrigger) { _tsys.Target = collision.transform; }
         }

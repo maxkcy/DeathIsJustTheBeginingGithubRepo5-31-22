@@ -23,10 +23,11 @@ public class PlayerInputSystem : MonoBehaviour
         PlayerInputActionMap.Player.Move.performed += MovePressed;
         PlayerInputActionMap.Player.Move.canceled += MoveUnpressed;
         PlayerInputActionMap.Player.Fire.performed += FirePressed;
-        PlayerInputActionMap.Player.Fire.canceled += (ctx => { 
-            _fire = false;
-            //Debug.Log("<color=green>PlayerIS: </color> Fired Shot " + _fire);
-        });
+        // PlayerInputActionMap.Player.Fire.canceled += (ctx => { 
+        //    _fire = false;
+        // Debug.Log("<color=green>PlayerIS: </color> Fired Shot " + _fire);
+        // });
+        PlayerInputActionMap.Player.Fire.canceled += FireUnpressed;
         PlayerInputActionMap.Player.MouseMoved.performed += MouseMoved;
         PlayerInputActionMap.Player.MouseMoved.canceled += MouseMoved;
     }
@@ -36,6 +37,7 @@ public class PlayerInputSystem : MonoBehaviour
         PlayerInputActionMap.Player.Move.performed -= MovePressed;
         PlayerInputActionMap.Player.Move.canceled -= MoveUnpressed;
         PlayerInputActionMap.Player.Fire.performed -= FirePressed;
+        PlayerInputActionMap.Player.Fire.canceled -= FireUnpressed;
         PlayerInputActionMap.Player.MouseMoved.performed -= MouseMoved;
         PlayerInputActionMap.Player.MouseMoved.canceled -= MouseMoved;
 
@@ -59,17 +61,12 @@ public class PlayerInputSystem : MonoBehaviour
         //Debug.Log("<color=green>PlayerIS: </color> Fired Shot " + Fire );     
     }
 
+    private void FireUnpressed(InputAction.CallbackContext ctx) {
+        _fire = false;
+    }
     private void MouseMoved(InputAction.CallbackContext ctx) {
         _mousePos = ctx.ReadValue<Vector2>();
         //Debug.Log("<color=green>PlayerIS: </color> MouseMoved ( " + _mousePos.x + " , " + _mousePos.y + ")" );
-    }
-    void Start()
-    {
-    
-    }
-
-    private void Update() {
-
     }
 
 }

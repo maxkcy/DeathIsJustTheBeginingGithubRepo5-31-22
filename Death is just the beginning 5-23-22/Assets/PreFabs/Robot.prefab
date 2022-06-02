@@ -57,9 +57,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -3.63}
+  m_Offset: {x: 0, y: -2}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 2
 --- !u!1 &2677282390025145029
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5123236022369131594}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: WP (0)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -191,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5123236022634281409}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: WP (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2829a14794cc34780172b1f6d041d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _raycastLenght: 2.75
+  _raycastLenght: 4.5
   Target: {fileID: 0}
   IsCmdOff: 0
 --- !u!114 &5123236023251125293
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e311c46d4c436f349a6638dee9690114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireClip: {fileID: 8300000, guid: 150495f23eb92754284c53ba0b31b1b8, type: 3}
+  FireClip: {fileID: 8300000, guid: 8e82a56545cc4fc418172fdf06e2aea3, type: 3}
   IdleClip: {fileID: 8300000, guid: 48ea3559bbc616c448808c7fc808b66c, type: 3}
   audsc: {fileID: 0}
 --- !u!1 &5123236023721381962
@@ -525,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5123236023721381963}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}

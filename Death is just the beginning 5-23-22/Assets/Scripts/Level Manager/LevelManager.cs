@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
         {
             whattahappan = WhatHappened.Won;
         }
-        if (Friendlies.Count == 0)
+        else if (Friendlies.Count == 0)
         {
             whattahappan = WhatHappened.Lost;
         }

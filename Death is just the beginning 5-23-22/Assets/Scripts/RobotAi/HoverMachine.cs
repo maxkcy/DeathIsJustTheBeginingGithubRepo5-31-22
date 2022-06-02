@@ -21,14 +21,6 @@ public class HoverMachine : MonoBehaviour
         if (collision.CompareTag("PlatForm") && !_roboCtrl.Idle)
         {
             rb.AddForce(new Vector2(0, _rPatrol.force));
-            if (rb.velocity.y <= 1)
-            {
-                transform.parent.position = new Vector2(transform.parent.position.x, transform.parent.position.y + .01f);
-            }
-        }
-        if (collision.CompareTag("Friendly"))
-        {
-            if (!collision.isTrigger) { _tsys.Target = collision.transform; }
         }
     }
 

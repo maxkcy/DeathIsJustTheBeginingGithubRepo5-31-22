@@ -29,6 +29,7 @@ public class TargetingSystem : MonoBehaviour
     }
 
     public bool CheckIfInVicinity() {
+        
         float distance = Vector2.Distance(Target.position, transform.position);
         if (IsCmdOff)
         {
@@ -37,57 +38,74 @@ public class TargetingSystem : MonoBehaviour
         }
         else
         {
-            if (distance < _raycastLenght * 3) return true;
+            if (distance < _raycastLenght * 2) return true;
             else return false;
         }
     }
 
     public void TargetPlayer(bool playerInVicinity) {
-        if (!playerInVicinity) { roboCtrl.Targeting = false; return; }
+        if (!playerInVicinity) 
+        { 
+            roboCtrl.Targeting = false;
+            return; 
+        }
         Vector2 dir = (Vector2)(Target.position - transform.position).normalized;
         Debug.DrawRay(transform.position, dir * _raycastLenght, Color.black);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, IsCmdOff ? _raycastLenght : _raycastLenght * 3,
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, IsCmdOff ? _raycastLenght : _raycastLenght * 2,
                                             ~LayerMask.GetMask("Enemy", "Ignore Raycast", "Ladder"));
-        Debug.Log("<color=black>my targeting system hit:</color> " + hit.collider.tag);
-        if (hit && hit.collider.CompareTag("Friendly"))
+        if (hit)
         {
-            //Debug.Log("<color=black>Targeting System: rayCast hit on:</color>" + hit.collider.tag);
-            float player_xDist = Mathf.Abs(Target.position.x - transform.position.x);
-
-            if (player_xDist < .5f)
+            Debug.Log("<color=black>my targeting system hit:</color> " + hit.collider.tag); 
+            if (hit.collider.CompareTag("Friendly"))
             {
-                _anim.SetTrigger("PlayerOverhead");
-                roboCtrl.Targeting = false;
                 roboCtrl.Idle = true;
-            }
-            
-            if (Mathf.Sign(dir.x) < 0)
-            {
-                sr.flipX = true;
-            }
-            else if (Mathf.Sign(dir.x) > 0)
-            {
-                sr.flipX = false;
-            }
-            if (!roboCtrl.Dead)
-            {
-                //Debug.Log("<color=black>TargetingSystem: </color>Shooting Friendly, need to induce Damage");
-                Target.GetComponent<Health>().TakeDamage();
-                if (IsCmdOff) 
+                float trg_dltX = Mathf.Abs(Target.position.x - transform.position.x);
+                if (trg_dltX < .5f)
                 {
-                    int rand = Random.Range(-1, 1);
-                    if (rand < 0) roboCtrl.Targeting = false;
-                }
-                else
+                    _anim.SetTrigger("PlayerOverhead");
+                    roboCtrl.Targeting = false;
+                    
+                }else
                 {
                     roboCtrl.Targeting = true;
                 }
-                roboCtrl.Idle = true;
+                
+
+                if (Mathf.Sign(dir.x) < 0)
+                {
+                    sr.flipX = true;
+                }
+                else if (Mathf.Sign(dir.x) > 0)
+                {
+                    sr.flipX = false;
+                }
+
+                if (!roboCtrl.Dead)
+                {
+                    if (IsCmdOff)
+                    {
+                        int rand = Random.Range(-1, 1);
+                        if (rand < 0 && Target != null) 
+                        {
+                            var hp = Target.GetComponent<Health>();
+                            hp.TakeDamage(.5f);
+                        } // gave null error w/ wheel feet :0
+
+                    }
+                    else
+                    {
+                        if (Target != null)
+                        {
+                            var hp = Target.GetComponent<Health>();
+                            hp.TakeDamage(1f);
+                        }
+                    }
+
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
             }
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-        else { roboCtrl.Targeting = false; }
-       
+            else { roboCtrl.Targeting = false; }
+        }      
     }
 
 

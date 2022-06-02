@@ -25,10 +25,12 @@ public class RoboCtrl : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         levelMan = FindObjectOfType<LevelManager>();
         sFXctrl = GetComponent<SFXctrl>();
+        Target = GetComponent<TargetingSystem>().Target;
     }
 
-    void Update() {
-        Target = GetComponent<TargetingSystem>().Target;
+    void Update() 
+        {
+        
         if (Target != null)
         {
             float player_xDist = Mathf.Abs(Target.transform.position.x - transform.position.x);
@@ -40,11 +42,10 @@ public class RoboCtrl : MonoBehaviour
 
         _anim.SetFloat("V_Speed", rb.velocity.y);
 
-        
         if (Idle)
         {
             _anim.SetBool("Idle", true);
-            if (!Target)
+            if (!Targeting)
             {
                 sFXctrl.audsc.Stop();
             }
@@ -52,33 +53,39 @@ public class RoboCtrl : MonoBehaviour
         else
         {
             _anim.SetBool("Idle", false);
-            if (!sFXctrl.audsc.isPlaying)
-            {
-                sFXctrl.audsc.Play();
-            }
+
             if (sFXctrl.audsc.clip != sFXctrl.IdleClip && !Targeting)
             {
                 sFXctrl.audsc.clip = sFXctrl.IdleClip;
+            }
+            if (!sFXctrl.audsc.isPlaying)
+            {
+                sFXctrl.audsc.Play();
             }
 
         }
 
        if (Targeting)
-            {
-                _anim.SetBool("Targeting", true);
-            if (!sFXctrl.audsc.isPlaying)
-            {
-                sFXctrl.audsc.Play();
-            }
+       {
+            _anim.SetBool("Targeting", true);
+            Debug.Log("<color=black>RoboCtrl: </color>" + $"{gameObject} am shooting ");
             if (sFXctrl.audsc.clip != sFXctrl.FireClip)
             {
                 sFXctrl.audsc.clip = sFXctrl.FireClip;
             }
-        }
-            else
+            if (!sFXctrl.audsc.isPlaying)
             {
-                _anim.SetBool("Targeting", false);
+                sFXctrl.audsc.Play();
             }
+        }
+        else
+        {
+             _anim.SetBool("Targeting", false);
+            if (sFXctrl.audsc.clip == sFXctrl.FireClip)
+            {
+                sFXctrl.audsc.Stop();
+            }
+        }
 
 
         }

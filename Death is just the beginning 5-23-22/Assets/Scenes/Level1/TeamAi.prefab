@@ -300,8 +300,8 @@ MonoBehaviour:
   - {fileID: 8301438648324517522}
   - {fileID: 8301438647891587093}
   m_Bounds:
-    m_Center: {x: 0.12126768, y: 0.41582257, z: 0}
-    m_Extent: {x: 0.51210654, y: 0.60996515, z: 0}
+    m_Center: {x: 0.121267796, y: 0.41582268, z: 0}
+    m_Extent: {x: 0.5121064, y: 0.60996515, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!95 &8301438648230415849
@@ -427,6 +427,7 @@ MonoBehaviour:
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
+  LadderGrid: {fileID: 0}
 --- !u!114 &7153398231231025996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +482,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1000
   MainCam: {fileID: 0}
-  Dead: 0
   levelManager: {fileID: 0}
 --- !u!82 &472901379
 AudioSource:

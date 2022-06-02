@@ -8,6 +8,7 @@ TagManager:
   - Friendly
   - Enemy
   - CMD
+  - Ladder
   layers:
   - Default
   - TransparentFX

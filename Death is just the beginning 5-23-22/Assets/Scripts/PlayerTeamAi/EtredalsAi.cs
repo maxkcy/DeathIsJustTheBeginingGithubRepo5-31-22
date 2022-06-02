@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.Tilemaps;
 
 public class EtredalsAi : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class EtredalsAi : MonoBehaviour
     public bool followEnabled = true;
     public bool jumpEnabled = true;
     public bool directionLookEnabled = true;
+
+    [Header("Specific")]
 
     private Path path;
     private int currentWaypoint = 0;
@@ -94,18 +97,34 @@ public class EtredalsAi : MonoBehaviour
         {
             if (direction.y > jumpNodeHeightRequirement)
             {
+                
                 rb.AddForce(Vector2.up * Force * jumpModifier);
             }
         }
 
         // Movement
         rb.AddForce(force);
+        
+        
 
         // Next Waypoint
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if (distance < nextWaypointDistance)
         {
             currentWaypoint++;
+            // My ladder
+            bool onLadder = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f, (LayerMask.GetMask("Ladder")));
+            if (onLadder)
+            {
+                RaycastHit2D hit = Physics2D.Raycast((Vector2)path.vectorPath[currentWaypoint], new Vector2(0, 1), 2f, LayerMask.GetMask("Ladder"));
+                if (hit)
+                {
+                    if (Mathf.Abs(rb.velocity.x) > .1f)
+                    {
+                        rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * .1f, rb.velocity.y);
+                    }
+                }
+            }
         }
 
         // Direction Graphics Handling
@@ -166,6 +185,10 @@ public class EtredalsAi : MonoBehaviour
 
     private void RotateTorso() {
         Vector2 dir = ((Vector2)target.position - (Vector2)_torsoBone.position).normalized;
+        if (Vector2.Distance(transform.position, target.transform.position) > 20) {
+            _torsoBone.rotation = new Quaternion(0, 0, 0, 0);
+            return;
+        } 
         float deltaZAngle = Quaternion.FromToRotation(-_torsoBone.up, dir).eulerAngles.z;
         deltaZAngle *= _torsoBone.lossyScale.x;
         _torsoBone.Rotate(0, 0, deltaZAngle);
